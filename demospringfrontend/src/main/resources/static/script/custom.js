@@ -1,8 +1,6 @@
 alert("I'm active");
 
-
-
-document.getElementById('reportbtn').addEventListener("click", function(){
+document.getElementById('getReport').addEventListener("click", function(){
 
     getReport();
 
@@ -25,7 +23,9 @@ function getReport() {
                 response.json().then(function(data) {
                     console.log(data);
                     let myJson = JSON.stringify(data);
-                    document.getElementById('demo').innerHTML = myJson;
+                    insertReportRow(data);
+
+                    //document.getElementById('demo').innerHTML = myJson;
                 });
             }
         )
@@ -33,17 +33,31 @@ function getReport() {
             console.log('Fetch Error :-S', err);
         });
 
+    function clearTable(){
+        let tableHeaderRowCount = 1;
+        let table = document.getElementById('report-table');
+        let rowCount = table.rows.length;
+        for (var i = tableHeaderRowCount; i < rowCount; i++) {
+            table.deleteRow(tableHeaderRowCount);
+        }
+    }
 
-    // fetch('http://some-site.com/cors-enabled/some.json', {mode: 'cors'})
-    //     .then(function(response) {
-    //         return response.text();
-    //     })
-    //     .then(function(text) {
-    //         console.log('Request successful', text);
-    //     })
-    //     .catch(function(error) {
-    //         log('Request failed', error)
-    //     });
+    function insertReportRow(data) {
+        console.log(data[0].jurisdiction);
+        clearTable();
+        let table = document.getElementById("report-table");
+       for(let i = 0; i < data.length; i++){
+           let row = table.insertRow(i+1);
+           let jurisdiction = row.insertCell(0);
+           let scenarioId = row.insertCell(1);
+           let scenarioDescription = row.insertCell(2);
+           let scenarioStatus = row.insertCell(3);
+           jurisdiction.innerHTML = data[i].jurisdiction;
+           scenarioId.innerHTML = data[i].scenarioId;
+           scenarioDescription.innerHTML = data[i].scenarioDescription;
+           scenarioStatus.innerHTML = data[i].status;
+       }
+    }
 }
 
 
