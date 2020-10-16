@@ -11,13 +11,14 @@ public class Report {
     }
 
     public Report(String scenarioId, String scenarioDescription, LocalDate dateRun,
-                  String jurisdiction, String ratingProgram, String status) {
+                  String jurisdiction, String ratingProgram, String status, String combineId) {
         this.scenarioId = scenarioId;
         this.dateRun = dateRun;
         this.scenarioDescription = scenarioDescription;
         this.jurisdiction = jurisdiction;
         this.ratingProgram = ratingProgram;
         this.status = status;
+        this.combineId = combineId;
     }
     @Id
     @GeneratedValue
@@ -29,6 +30,7 @@ public class Report {
     private String jurisdiction;
     private String ratingProgram;
     private String status;
+    private String combineId;
 
     public Long getId() {
         return id;
@@ -58,6 +60,10 @@ public class Report {
         return status;
     }
 
+    public String getCombineId() {
+        return combineId;
+    }
+
     @Override
     public String toString() {
         return "Report{" +
@@ -67,6 +73,7 @@ public class Report {
                 ", dateRun=" + dateRun.toString() +
                 ", jurisdiction='" + jurisdiction + '\'' +
                 ", ratingProgram='" + ratingProgram + '\'' +
+                ", combineId='" + combineId + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

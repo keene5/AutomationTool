@@ -11,4 +11,8 @@ public class ViewController {
     public String page(){
         return "index";
     }
+    @RequestMapping("/combinedata")
+    public String dataPage(){
+        return "combinedata";
+    }
 }
